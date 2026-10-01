@@ -1,0 +1,30 @@
+name: FitFlow CI
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  repository-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Check project structure
+        run: |
+          test -d frontend
+          test -d backend
+          test -d ai-service
+          test -d docs
+          test -f README.md
+          test -f .gitignore
+
+      - name: Completed
+        run: echo "FitFlow repository structure is valid."
